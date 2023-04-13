@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping ("medicos")
 
 public class MedicoController {
-    @Autowired
+    @Autowired //Precisamos avisar ao Spring que esse novo atributo pelo ser instanciado. Faremos a injeção de dependências inserindo a anotação
     private MedicoRepository repository;
     @PostMapping
     @Transactional
