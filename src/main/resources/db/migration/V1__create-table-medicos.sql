@@ -1,3 +1,5 @@
+-- arquivo SQL que servirá como migration, responsável por criar a tabela de médicos
+
 create table medicos(
 
     id bigint not null auto_increment,

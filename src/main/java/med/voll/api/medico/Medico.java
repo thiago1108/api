@@ -1,13 +1,17 @@
 package med.voll.api.medico;
 import jakarta.persistence.*;
+
+//  importar a biblioteca Lombok, para gerar os códigos Java que faltam automaticamente.
+//  Adicionaremos @Getter, @NoArgsConstructor, @AllArgsConstructor, @EqualsAndHashCode(of = "id")
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.endereco.Endereco;
 
-@Table(name = "medicos")
-@Entity(name = "Medico")
+@Table(name = "medicos") // tabela medicos //add as anotações da JPA para transformar isso em uma entidade
+@Entity(name = "Medico") // nome da entidade
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
