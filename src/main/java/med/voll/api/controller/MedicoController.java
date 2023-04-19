@@ -5,10 +5,13 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.endereco.Endereco;
 import med.voll.api.medico.DadosCadastroMedico;
+import med.voll.api.medico.DadosListagemMedico;
 import med.voll.api.medico.Medico;
 import med.voll.api.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController // Para comunicarmos o Spring MVC que é uma classe controller utliza @RESTCONTOLLER por nao ser uma aplicacao web tradicional e sim uma API Rest,
 // ao chegar uma requisição para /medicos o Spring vai detectar que deverá chamar o MedicoController
@@ -26,4 +29,11 @@ public class MedicoController {
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
         repository.save(new Medico(dados));
     }
+
+    @GetMapping // metodo listar
+    public List<DadosListagemMedico> listar(){ // criar DTO de Dados listagem medico
+        return repository.findAll().stream().map(DadosListagemMedico::new).toList(); // findall devolver lista de medicos entao necessidade de uma conversao
+    }
 }
+// para converter metodo stream .map que converte de medico para listagem medico e passa coo parametro onde chama o metodo construtor que esta na record dadoslistagem medico
+// . tolist converte para lista
