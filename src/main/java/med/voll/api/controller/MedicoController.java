@@ -9,6 +9,8 @@ import med.voll.api.medico.DadosListagemMedico;
 import med.voll.api.medico.Medico;
 import med.voll.api.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,10 +32,16 @@ public class MedicoController {
         repository.save(new Medico(dados));
     }
 
-    @GetMapping // metodo listar
-    public List<DadosListagemMedico> listar(){ // criar DTO de Dados listagem medico
-        return repository.findAll().stream().map(DadosListagemMedico::new).toList(); // findall devolver lista de medicos entao necessidade de uma conversao
+    //@GetMapping // metodo listar
+   // public List<DadosListagemMedico> listar(){ // criar DTO de Dados listagem medico
+     //   return repository.findAll().stream().map(DadosListagemMedico::new).toList(); // findall devolver lista de medicos entao necessidade de uma conversao
+
+    @GetMapping // metodo paginacao
+    public Page<DadosListagemMedico> listar(Pageable paginacao){ // criar DTO de Dados listagem medico // Pageabe para fazer paginacao e passa como paramentro no findall
+        return repository.findAll(paginacao).map(DadosListagemMedico::new); // findall devolver lista de medicos entao necessidade de uma conversao
     }
+
 }
+
 // para converter metodo stream .map que converte de medico para listagem medico e passa coo parametro onde chama o metodo construtor que esta na record dadoslistagem medico
 // . tolist converte para lista
