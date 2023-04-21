@@ -4,10 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.endereco.Endereco;
-import med.voll.api.medico.DadosCadastroMedico;
-import med.voll.api.medico.DadosListagemMedico;
-import med.voll.api.medico.Medico;
-import med.voll.api.medico.MedicoRepository;
+import med.voll.api.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +38,12 @@ public class MedicoController {
         return repository.findAll(paginacao).map(DadosListagemMedico::new); // findall devolver lista de medicos entao necessidade de uma conversao
     }
 
+    @PutMapping // metodo atualiza
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+        var medico = repository.getReferenceById(dados.id()); // variavel medico recebe id que vem dentro de dados.id atraves do repository.getReferenceByID
+        medico.atualizarinformacoes(dados);
+    }
 }
 
 // para converter metodo stream .map que converte de medico para listagem medico e passa coo parametro onde chama o metodo construtor que esta na record dadoslistagem medico

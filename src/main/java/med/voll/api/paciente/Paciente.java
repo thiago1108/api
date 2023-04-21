@@ -24,7 +24,7 @@ public class Paciente{
     private String nome;
     private String email;
     private String telefone;
-    private String CPF;
+    private String cpf;
 
 
     @Embedded
@@ -34,7 +34,7 @@ public class Paciente{
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
-        this.CPF = dados.cpf();
+        this.cpf = dados.cpf();
         this.endereco = new Endereco(dados.endereco());
     }
 }

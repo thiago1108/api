@@ -16,7 +16,7 @@ public record DadosCadastroPaciente(
         @NotBlank  // não pode ser vazio: precisa de um texto
         String telefone,
         @NotBlank  // não pode ser vazio: precisa de um texto
-        @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}")  // Dentro da segunda anotação, para esclarecer a quantidade de dígitos
+        @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}\\.?\\d{2}")  // Dentro da segunda anotação, para esclarecer a quantidade de dígitos
         // passaremos a expressão regular
         String cpf,
         @NotNull // é um campo obrigatório
