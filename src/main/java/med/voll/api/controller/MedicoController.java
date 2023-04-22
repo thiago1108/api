@@ -35,7 +35,7 @@ public class MedicoController {
 
     @GetMapping // metodo paginacao
     public Page<DadosListagemMedico> listar(Pageable paginacao){ // criar DTO de Dados listagem medico // Pageabe para fazer paginacao e passa como paramentro no findall
-        return repository.findAll(paginacao).map(DadosListagemMedico::new); // findall devolver lista de medicos entao necessidade de uma conversao
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new); // findall devolver lista de medicos entao necessidade de uma conversao
     }
 
     @PutMapping // metodo atualiza
@@ -43,6 +43,12 @@ public class MedicoController {
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
         var medico = repository.getReferenceById(dados.id()); // variavel medico recebe id que vem dentro de dados.id atraves do repository.getReferenceByID
         medico.atualizarinformacoes(dados);
+    }
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
     }
 }
 
